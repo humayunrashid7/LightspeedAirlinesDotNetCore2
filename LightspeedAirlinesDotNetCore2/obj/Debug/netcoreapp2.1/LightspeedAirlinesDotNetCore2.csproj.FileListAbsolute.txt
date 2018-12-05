@@ -1,0 +1,14 @@
+C:\IT Stuff\LightspeedAirlinesDotNetCore2\LightspeedAirlinesDotNetCore2\bin\Debug\netcoreapp2.1\LightspeedAirlinesDotNetCore2.deps.json
+C:\IT Stuff\LightspeedAirlinesDotNetCore2\LightspeedAirlinesDotNetCore2\bin\Debug\netcoreapp2.1\LightspeedAirlinesDotNetCore2.runtimeconfig.json
+C:\IT Stuff\LightspeedAirlinesDotNetCore2\LightspeedAirlinesDotNetCore2\bin\Debug\netcoreapp2.1\LightspeedAirlinesDotNetCore2.runtimeconfig.dev.json
+C:\IT Stuff\LightspeedAirlinesDotNetCore2\LightspeedAirlinesDotNetCore2\bin\Debug\netcoreapp2.1\LightspeedAirlinesDotNetCore2.dll
+C:\IT Stuff\LightspeedAirlinesDotNetCore2\LightspeedAirlinesDotNetCore2\bin\Debug\netcoreapp2.1\LightspeedAirlinesDotNetCore2.pdb
+C:\IT Stuff\LightspeedAirlinesDotNetCore2\LightspeedAirlinesDotNetCore2\obj\Debug\netcoreapp2.1\LightspeedAirlinesDotNetCore2.csprojAssemblyReference.cache
+C:\IT Stuff\LightspeedAirlinesDotNetCore2\LightspeedAirlinesDotNetCore2\obj\Debug\netcoreapp2.1\LightspeedAirlinesDotNetCore2.csproj.CoreCompileInputs.cache
+C:\IT Stuff\LightspeedAirlinesDotNetCore2\LightspeedAirlinesDotNetCore2\obj\Debug\netcoreapp2.1\LightspeedAirlinesDotNetCore2.RazorAssemblyInfo.cache
+C:\IT Stuff\LightspeedAirlinesDotNetCore2\LightspeedAirlinesDotNetCore2\obj\Debug\netcoreapp2.1\LightspeedAirlinesDotNetCore2.RazorAssemblyInfo.cs
+C:\IT Stuff\LightspeedAirlinesDotNetCore2\LightspeedAirlinesDotNetCore2\obj\Debug\netcoreapp2.1\LightspeedAirlinesDotNetCore2.AssemblyInfoInputs.cache
+C:\IT Stuff\LightspeedAirlinesDotNetCore2\LightspeedAirlinesDotNetCore2\obj\Debug\netcoreapp2.1\LightspeedAirlinesDotNetCore2.AssemblyInfo.cs
+C:\IT Stuff\LightspeedAirlinesDotNetCore2\LightspeedAirlinesDotNetCore2\obj\Debug\netcoreapp2.1\LightspeedAirlinesDotNetCore2.RazorTargetAssemblyInfo.cache
+C:\IT Stuff\LightspeedAirlinesDotNetCore2\LightspeedAirlinesDotNetCore2\obj\Debug\netcoreapp2.1\LightspeedAirlinesDotNetCore2.dll
+C:\IT Stuff\LightspeedAirlinesDotNetCore2\LightspeedAirlinesDotNetCore2\obj\Debug\netcoreapp2.1\LightspeedAirlinesDotNetCore2.pdb
