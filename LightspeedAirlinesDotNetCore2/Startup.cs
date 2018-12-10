@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using LightspeedAirlinesDotNetCore2.Filters;
+using LightspeedAirlinesDotNetCore2.Infrastructure;
 using LightspeedAirlinesDotNetCore2.Models;
+using LightspeedAirlinesDotNetCore2.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -32,6 +36,14 @@ namespace LightspeedAirlinesDotNetCore2
             // This is the basic info about the airline stored in "appsetting.json".
             services.Configure<AirlineInfo>(Configuration.GetSection("Info"));
 
+            // Implement the AircraftService, AddScoped is used because we cant one instance for each separate request
+            services.AddScoped<IAircraftService, DefaultAircraftService>();
+
+            // Use an in memory database for development
+            // TODO: Swap out for a real database in production
+            services.AddDbContext<AirlineApiDbContext>(
+                options => options.UseInMemoryDatabase("airlinedb"));
+
             services
                 .AddMvc(options =>
                 {
@@ -50,6 +62,9 @@ namespace LightspeedAirlinesDotNetCore2
                 options.ReportApiVersions = true;
                 options.ApiVersionSelector = new CurrentImplementationApiVersionSelector(options);
             });
+
+            services.AddAutoMapper(
+                options => options.AddProfile<MappingProfile>());
 
             services.AddCors(options =>
             {
