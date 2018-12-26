@@ -11,7 +11,8 @@ using Microsoft.EntityFrameworkCore;
 namespace LightspeedAirlinesDotNetCore2.Controllers
 {
     [ApiController]
-    [Route("/Aircrafts")]
+    [ApiVersion("1.0")]
+    [Route("api/aircrafts")]
     public class AircraftsController : ControllerBase
     {
         private readonly IAircraftService aircraftService;
@@ -21,20 +22,42 @@ namespace LightspeedAirlinesDotNetCore2.Controllers
             this.aircraftService = aircraftService;
         }
 
-        [HttpGet(Name = nameof(GetAircrafts))]
-        public IActionResult GetAircrafts()
+        [HttpGet(Name = nameof(GetAllAircrafts))]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200)]
+        public IActionResult GetAllAircrafts()
         {
-            throw new NotImplementedException();
+            IEnumerable<Aircraft> aircrafts = aircraftService.GetAllAircrafts();
+
+            if (aircrafts == null) return NotFound();
+
+            // Enumerate through each single Aircraft and call CreaLinks method.
+            aircrafts = aircrafts.Select(aircraft =>
+            {
+                aircraft = CreateLinks(aircraft);
+                return aircraft;
+            });
+
+            return Ok(aircrafts);
         }
 
         // GET /aircrafts/{aircraftId}
         [HttpGet("{aircraftId}", Name = nameof(GetAircraftById))]
         [ProducesResponseType(404)]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<Aircraft>> GetAircraftById(Guid aircraftId)
+        public IActionResult GetAircraftById(Guid aircraftId)
         {
-            var aircraft = await aircraftService.GetAircraftAsync(aircraftId);
+            Aircraft aircraft = aircraftService.GetAircraftById(aircraftId);
             if (aircraft == null) return NotFound();
+
+            return Ok(CreateLinks(aircraft));
+        }
+
+        // Method to create Links for the Resource Aircraft
+        public Aircraft CreateLinks(Aircraft aircraft)
+        {
+            var href = Url.Link(nameof(GetAircraftById), new { aircraftId = aircraft.Id });
+            aircraft.Links.Add(new Link(href, "self", Link.GetMethod));
 
             return aircraft;
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using LightspeedAirlinesDotNetCore2.Entities;
 using LightspeedAirlinesDotNetCore2.Models;
 
 namespace LightspeedAirlinesDotNetCore2.Infrastructure

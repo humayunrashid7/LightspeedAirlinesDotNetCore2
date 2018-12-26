@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace LightspeedAirlinesDotNetCore2.Controllers
 {
     [ApiController]
-    [Route("/")]
     [ApiVersion("1.0")]
+    [Route("/")]
     public class RootController : ControllerBase
     {
 
@@ -20,9 +20,9 @@ namespace LightspeedAirlinesDotNetCore2.Controllers
             var response = new
             {
                 href = Url.Link(nameof(GetRoot), null),
-                rooms = new
+                aircrafts = new
                 {
-                    href = Url.Link(nameof(AircraftsController.GetAircrafts), null)
+                    href = Url.Link(nameof(AircraftsController.GetAllAircrafts), null)
                 },
                 info = new
                 {

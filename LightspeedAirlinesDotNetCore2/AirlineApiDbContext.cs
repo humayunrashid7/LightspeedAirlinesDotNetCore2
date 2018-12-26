@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LightspeedAirlinesDotNetCore2.Entities;
 using LightspeedAirlinesDotNetCore2.Models;
 using Microsoft.EntityFrameworkCore;
 
