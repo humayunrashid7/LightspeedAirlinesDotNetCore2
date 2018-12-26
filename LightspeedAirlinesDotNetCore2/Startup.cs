@@ -44,16 +44,25 @@ namespace LightspeedAirlinesDotNetCore2
             services.AddDbContext<AirlineApiDbContext>(
                 options => options.UseInMemoryDatabase("airlinedb"));
 
+//            // Use Sql Server Database
+//            const string connectionString = "Server=HR-PC;Database=AirlineDbTest;Trusted_Connection=True;";
+//            services.AddDbContext<AirlineApiDbContext>(
+//                options => options.UseSqlServer(connectionString));
+
             services
                 .AddMvc(options =>
                 {
+                    // Filter for Exception Handlings that returns Exceptions in JSON Format
                     options.Filters.Add<JsonExceptionFilter>();
+
+                    // Filter for Always requiring Https, No Redirection allowed
                     options.Filters.Add<RequireHttpsOrCloseAttribute>();
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddRouting(options => options.LowercaseUrls = true);
 
+            // Api Versioning: Add Nuget Package 'Microsoft.AspNetCore.Mvc.Versioning'
             services.AddApiVersioning(options =>
             {
                 options.DefaultApiVersion = new ApiVersion(1, 0);
@@ -63,9 +72,11 @@ namespace LightspeedAirlinesDotNetCore2
                 options.ApiVersionSelector = new CurrentImplementationApiVersionSelector(options);
             });
 
+            // Add Automapper Service (NuGet pkg: Automapper.Extensions.Microsoft.DependencyInjection
             services.AddAutoMapper(
                 options => options.AddProfile<MappingProfile>());
 
+            // Add CORS Policy
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowMyApp", 

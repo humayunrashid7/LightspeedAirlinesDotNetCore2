@@ -5,6 +5,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using LightspeedAirlinesDotNetCore2.Entities;
 using LightspeedAirlinesDotNetCore2.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,17 +22,22 @@ namespace LightspeedAirlinesDotNetCore2.Services
             this.mapper = mapper;
         }
 
-        public async Task<Aircraft> GetAircraftAsync(Guid id)
+        public IEnumerable<Aircraft> GetAllAircrafts()
         {
-            var entity = await context.Aircrafts.SingleAsync(x => x.Id == id);
+            IEnumerable<AircraftEntity> aircrafts = context.Aircrafts.ToList();
+            if (aircrafts.Count() == 0) return null;
 
-            if (entity == null)
-            {
-                return null;
-            }
+            return mapper.Map<IEnumerable<Aircraft>>(aircrafts);
+        }
 
-            // Return the map to "Aircraft" using the "entity" object
-            return mapper.Map<Aircraft>(entity);
+        public Aircraft GetAircraftById(Guid id)
+        {
+            AircraftEntity aircraftEntity = context.Aircrafts.SingleOrDefault(a => a.Id == id);
+
+            if (aircraftEntity == null) return null;
+
+            // Return Mapp.Map to Aircraft(JsonResource) from the Aircraft(DatabaseEntity)
+            return mapper.Map<Aircraft>(aircraftEntity);
 
             // The mapping below is replaced by the automapper above.
             //return new Aircraft
