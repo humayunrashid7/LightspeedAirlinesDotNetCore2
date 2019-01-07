@@ -15,6 +15,10 @@ namespace LightspeedAirlinesDotNetCore2.Models
         public const string UpdateMethod = "PUT";
         public const string DeleteMethod = "DELETE";
 
+        public Link()
+        {
+        }
+
         public Link(string href, string relation, string method)
         {
             Href = href;

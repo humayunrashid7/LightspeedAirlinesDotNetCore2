@@ -38,9 +38,17 @@ namespace LightspeedAirlinesDotNetCore2.Controllers
                 return aircraft;
             });
 
+            Link link = new Link
+            {
+                Href = Url.Link(nameof(GetAllAircrafts), null),
+                Relation = "self",
+                Method = Link.GetMethod
+            };
+
             var response = new
             {
-                Value = aircrafts
+                Value = aircrafts,
+                Links = link
             };
 
             return Ok(response);
