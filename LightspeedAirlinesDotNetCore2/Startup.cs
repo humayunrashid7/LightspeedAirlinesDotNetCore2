@@ -104,6 +104,7 @@ namespace LightspeedAirlinesDotNetCore2
             // Redirection is not required as as RequireHttpsOrCloseAttribute filter is added to the Filters list above.
             // app.UseHttpsRedirection();
 
+            app.UseStatusCodePages();
             app.UseCors("AllowMyApp");
             app.UseMvc();
         }

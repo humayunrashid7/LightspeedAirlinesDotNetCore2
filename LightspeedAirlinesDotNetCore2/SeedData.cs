@@ -31,7 +31,8 @@ namespace LightspeedAirlinesDotNetCore2
                 ManufactureDate = "March 2007",
                 Manufacturer = "Boeing",
                 Model = "777-300ER",
-                Registration = "C-FITL"
+                Registration = "C-FITL",
+                Capacity = 320
             });
 
             context.Aircrafts.Add(new AircraftEntity
@@ -41,7 +42,8 @@ namespace LightspeedAirlinesDotNetCore2
                 ManufactureDate = "March 2007",
                 Manufacturer = "Boeing",
                 Model = "777-200LR",
-                Registration = "C-FITL"
+                Registration = "C-FIZZ",
+                Capacity = 300
             });
 
             context.Aircrafts.Add(new AircraftEntity
@@ -51,7 +53,8 @@ namespace LightspeedAirlinesDotNetCore2
                 ManufactureDate = "April 2007",
                 Manufacturer = "Boeing",
                 Model = "777-200",
-                Registration = "C-FITL"
+                Registration = "C-FILL",
+                Capacity = 315
             });
 
             await context.SaveChangesAsync();

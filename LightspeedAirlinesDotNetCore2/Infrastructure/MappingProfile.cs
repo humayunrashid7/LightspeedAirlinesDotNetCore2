@@ -13,8 +13,14 @@ namespace LightspeedAirlinesDotNetCore2.Infrastructure
     {
         public MappingProfile()
         {
+            // Create Map from AircraftEntity to Aircraft Resource
             CreateMap<AircraftEntity, Aircraft>();
-            // TODO: Url.Link
+
+            // Create Map from AircraftFormCreate to Aircraft Entity
+            CreateMap<AircraftFormCreate, AircraftEntity>();
+
+            // Create Map from AircraftFormUpdate to Aircraft Entity
+            CreateMap<AircraftFormUpdate, AircraftEntity>();
         }
     }
 }

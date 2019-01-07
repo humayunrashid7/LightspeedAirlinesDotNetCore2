@@ -9,7 +9,14 @@ namespace LightspeedAirlinesDotNetCore2.Services
 {
     public interface IAircraftService
     {
-        Aircraft GetAircraftById(Guid id);
         IEnumerable<Aircraft> GetAllAircrafts();
+
+        Aircraft GetAircraftById(Guid id);
+
+        Aircraft CreateAircraft(AircraftFormCreate aircraftFormCreate);
+
+        void DeleteAircraft(Guid aircraftId);
+
+        void UpdateAircraft(Guid aircraftId, AircraftFormUpdate aircraftFormUpdate);
     }
 }

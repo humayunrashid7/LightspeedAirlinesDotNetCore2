@@ -13,31 +13,33 @@ namespace LightspeedAirlinesDotNetCore2.Services
 {
     public class DefaultAircraftService : IAircraftService
     {
-        private readonly AirlineApiDbContext context;
-        private readonly IMapper mapper;
+        private readonly AirlineApiDbContext _context;
+        private readonly IMapper _mapper;
 
         public DefaultAircraftService(AirlineApiDbContext context, IMapper mapper)
         {
-            this.context = context;
-            this.mapper = mapper;
+            this._context = context;
+            this._mapper = mapper;
         }
+
 
         public IEnumerable<Aircraft> GetAllAircrafts()
         {
-            IEnumerable<AircraftEntity> aircrafts = context.Aircrafts.ToList();
-            if (aircrafts.Count() == 0) return null;
+            IEnumerable<AircraftEntity> aircrafts = _context.Aircrafts.ToList();
+            if (!aircrafts.Any()) return null;
 
-            return mapper.Map<IEnumerable<Aircraft>>(aircrafts);
+            return _mapper.Map<IEnumerable<Aircraft>>(aircrafts);
         }
+
 
         public Aircraft GetAircraftById(Guid id)
         {
-            AircraftEntity aircraftEntity = context.Aircrafts.SingleOrDefault(a => a.Id == id);
+            AircraftEntity entity = _context.Aircrafts.SingleOrDefault(a => a.Id == id);
 
-            if (aircraftEntity == null) return null;
+            if (entity == null) return null;
 
-            // Return Mapp.Map to Aircraft(JsonResource) from the Aircraft(DatabaseEntity)
-            return mapper.Map<Aircraft>(aircraftEntity);
+            // Return Mapper.Map to Aircraft(JsonResource) from the Aircraft(DatabaseEntity)
+            return _mapper.Map<Aircraft>(entity);
 
             // The mapping below is replaced by the automapper above.
             //return new Aircraft
@@ -49,7 +51,40 @@ namespace LightspeedAirlinesDotNetCore2.Services
             //    Fin = entity.Fin,
             //    ManufactureDate = entity.ManufactureDate
             //};
+        }
 
+
+        public Aircraft CreateAircraft(AircraftFormCreate aircraftForm)
+        {
+            Guid newId = Guid.NewGuid();
+            AircraftEntity newAircraftEntity = _mapper.Map<AircraftEntity>(aircraftForm);
+
+            _context.Aircrafts.Add(newAircraftEntity);
+
+            var created = _context.SaveChanges();
+            if (created < 1) throw new InvalidOperationException("Could not create new aircraft.");
+
+            return _mapper.Map<Aircraft>(newAircraftEntity);
+        }
+
+        public void DeleteAircraft(Guid aircraftId)
+        {
+            AircraftEntity aircraft = _context.Aircrafts.SingleOrDefault(a => a.Id == aircraftId);
+            if (aircraft == null) return;
+
+            _context.Remove(aircraft);
+            _context.SaveChanges();
+        }
+
+        public void UpdateAircraft(Guid aircraftId, AircraftFormUpdate aircraftFormUpdate)
+        {
+            AircraftEntity aircrafEntity = _context.Aircrafts.SingleOrDefault(a => a.Id == aircraftId);
+
+            // Mapper.Map(Source, Dest), It converts the data from AircraftFormUpdate into AircraftEntity
+            // by Overriding the fields. After all it is required is to save changes
+            _mapper.Map(aircraftFormUpdate, aircrafEntity);
+
+            _context.SaveChanges();
         }
     }
 }

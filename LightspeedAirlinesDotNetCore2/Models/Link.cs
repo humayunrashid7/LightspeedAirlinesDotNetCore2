@@ -12,7 +12,7 @@ namespace LightspeedAirlinesDotNetCore2.Models
     {
         public const string GetMethod = "GET";
         public const string PostMethod = "POST";
-        public const string UpdateMethod = "UPDATE";
+        public const string UpdateMethod = "PUT";
         public const string DeleteMethod = "DELETE";
 
         public Link(string href, string relation, string method)
