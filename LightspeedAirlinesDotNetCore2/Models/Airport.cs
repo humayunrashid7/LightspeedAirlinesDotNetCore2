@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LightspeedAirlinesDotNetCore2.Models
 {
-    public class Airport
+    public class Airport : Resource
     {
         public Guid Id { get; set; }
         public string IataCode { get; set; }

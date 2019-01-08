@@ -55,8 +55,8 @@ namespace LightspeedAirlinesDotNetCore2.Services
 
         public Aircraft CreateAircraft(AircraftFormCreate aircraftForm)
         {
-            Guid newId = Guid.NewGuid();
             AircraftEntity newAircraftEntity = _mapper.Map<AircraftEntity>(aircraftForm);
+            newAircraftEntity.Id = Guid.NewGuid();
 
             _context.Aircrafts.Add(newAircraftEntity);
 

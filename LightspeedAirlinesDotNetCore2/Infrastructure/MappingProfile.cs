@@ -26,10 +26,10 @@ namespace LightspeedAirlinesDotNetCore2.Infrastructure
             CreateMap<AirportEntity, Airport>();
 
             // Create Map from AirportFormCreate to AirportEntity
-            CreateMap<AircraftFormCreate, AircraftEntity>();
+            CreateMap<AirportFormCreate, AirportEntity>();
 
             // Create Map from AirportFormUpdate to AirportEntity
-            CreateMap<AircraftFormUpdate, AircraftEntity>();
+            CreateMap<AirportFormUpdate, AirportEntity>();
         }
     }
 }

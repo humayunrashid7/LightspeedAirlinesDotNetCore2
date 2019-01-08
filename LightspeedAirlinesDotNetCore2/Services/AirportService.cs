@@ -23,7 +23,10 @@ namespace LightspeedAirlinesDotNetCore2.Services
 
         public IEnumerable<Airport> GetAllAirports()
         {
-            throw new NotImplementedException();
+            IEnumerable<AirportEntity> airports = _context.Airports.ToList();
+            if (!airports.Any()) return null;
+
+            return _mapper.Map<IEnumerable<Airport>>(airports);
         }
 
         public Airport GetAirportById(Guid id)
@@ -36,17 +39,31 @@ namespace LightspeedAirlinesDotNetCore2.Services
 
         public Airport CreateAirport(AirportFormCreate airportFormCreate)
         {
-            throw new NotImplementedException();
+            AirportEntity entity = _mapper.Map<AirportEntity>(airportFormCreate);
+            entity.Id = Guid.NewGuid();
+
+            _context.Airports.Add(entity);
+            var created = _context.SaveChanges();
+            if (created < 1) throw new InvalidOperationException("Could not create new airport.");
+
+            return _mapper.Map<Airport>(entity);
         }
 
         public void DeleteAirport(Guid airportId)
         {
-            throw new NotImplementedException();
+            AirportEntity entity = _context.Airports.SingleOrDefault(a => a.Id == airportId);
+            if (entity == null) return;
+
+            _context.Remove(entity);
+            _context.SaveChanges();
         }
 
         public void UpdateAirport(Guid airportId, AirportFormUpdate airportFormUpdate)
         {
-            throw new NotImplementedException();
+            AirportEntity entity = _context.Airports.SingleOrDefault(a => a.Id == airportId);
+            _mapper.Map(airportFormUpdate, entity);
+
+            _context.SaveChanges();
         }
     }
 }

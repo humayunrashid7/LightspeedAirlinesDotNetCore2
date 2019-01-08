@@ -57,6 +57,54 @@ namespace LightspeedAirlinesDotNetCore2
                 Capacity = 315
             });
 
+            context.Airports.Add(new AirportEntity
+            {
+                Id = Guid.Parse("46e009cc-47e2-463b-9dbb-cd412fb094d6"),
+                IataCode = "YYZ",
+                IcaoCode = "CYYZ",
+                Name = "Toronto Pearson International Airport",
+                City = "Toronto",
+                Country = "Canada",
+                Altitude = 569,
+                TimeZone = (DateTimeOffset.Now)
+            });
+
+            context.Airports.Add(new AirportEntity
+            {
+                Id = Guid.Parse("4ea02ffd-fe37-4271-87ac-a3e4cb5f691e"),
+                IataCode = "YUL",
+                IcaoCode = "CYUL",
+                Name = "Montréal–Pierre Elliott Trudeau International Airport",
+                City = "Montreal",
+                Country = "Canada",
+                Altitude = 118,
+                TimeZone = (DateTimeOffset.Now)
+            });
+
+            context.Airports.Add(new AirportEntity
+            {
+                Id = Guid.Parse("f2decec3-1763-4405-9243-deda35a997c4"),
+                IataCode = "YVR",
+                IcaoCode = "VYVR",
+                Name = "Vancouver International Airport",
+                City = "Vancouver",
+                Country = "Canada",
+                Altitude = 13,
+                TimeZone = (DateTimeOffset.Now)
+            });
+
+            context.Airports.Add(new AirportEntity
+            {
+                Id = Guid.Parse("3e7fde05-8c4f-4560-b910-75cb0c84e105"),
+                IataCode = "YYC",
+                IcaoCode = "CYYC",
+                Name = "Calgary International Airport",
+                City = "Calgary",
+                Country = "Canada",
+                Altitude = 3606,
+                TimeZone = (DateTimeOffset.Now)
+            });
+
             await context.SaveChangesAsync();
 
         }
