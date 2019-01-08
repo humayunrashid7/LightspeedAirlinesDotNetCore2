@@ -14,6 +14,7 @@ namespace LightspeedAirlinesDotNetCore2
         public AirlineApiDbContext(DbContextOptions options) :  base(options) { }
 
         public DbSet<AircraftEntity> Aircrafts { get; set; }
-        
+
+        public DbSet<AirportEntity> Airports { get; set; }
     }
 }

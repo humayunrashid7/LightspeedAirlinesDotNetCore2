@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 using AutoMapper;
 using LightspeedAirlinesDotNetCore2.Entities;
 using LightspeedAirlinesDotNetCore2.Models;
+using LightspeedAirlinesDotNetCore2.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace LightspeedAirlinesDotNetCore2.Services
 {
-    public class DefaultAircraftService : IAircraftService
+    public class AircraftService : IAircraftService
     {
         private readonly AirlineApiDbContext _context;
         private readonly IMapper _mapper;
 
-        public DefaultAircraftService(AirlineApiDbContext context, IMapper mapper)
+        public AircraftService(AirlineApiDbContext context, IMapper mapper)
         {
             this._context = context;
             this._mapper = mapper;
         }
-
 
         public IEnumerable<Aircraft> GetAllAircrafts()
         {
@@ -30,7 +30,6 @@ namespace LightspeedAirlinesDotNetCore2.Services
 
             return _mapper.Map<IEnumerable<Aircraft>>(aircrafts);
         }
-
 
         public Aircraft GetAircraftById(Guid id)
         {

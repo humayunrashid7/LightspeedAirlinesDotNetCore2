@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LightspeedAirlinesDotNetCore2.Models;
 
-namespace LightspeedAirlinesDotNetCore2.Services
+namespace LightspeedAirlinesDotNetCore2.Services.Interfaces
 {
     public interface IAircraftService
     {

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LightspeedAirlinesDotNetCore2.Entities
+namespace LightspeedAirlinesDotNetCore2.Models
 {
-    public class AirportEntity
+    public class AirportFormCreate
     {
-        public Guid Id { get; set; }
         public string IataCode { get; set; }
         public string IcaoCode { get; set; }
         public string Name { get; set; }

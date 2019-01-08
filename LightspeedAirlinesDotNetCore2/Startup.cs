@@ -7,6 +7,7 @@ using LightspeedAirlinesDotNetCore2.Filters;
 using LightspeedAirlinesDotNetCore2.Infrastructure;
 using LightspeedAirlinesDotNetCore2.Models;
 using LightspeedAirlinesDotNetCore2.Services;
+using LightspeedAirlinesDotNetCore2.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,8 +37,9 @@ namespace LightspeedAirlinesDotNetCore2
             // This is the basic info about the airline stored in "appsetting.json".
             services.Configure<AirlineInfo>(Configuration.GetSection("Info"));
 
-            // Implement the AircraftService, AddScoped is used because we cant one instance for each separate request
-            services.AddScoped<IAircraftService, DefaultAircraftService>();
+            // Implement the Services, AddScoped is used because we cant one instance for each separate request
+            services.AddScoped<IAircraftService, AircraftService>();
+            services.AddScoped<IAirportService, AirportService>();
 
             // Use an in memory database for development
             // TODO: Swap out for a real database in production
