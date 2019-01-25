@@ -16,5 +16,7 @@ namespace LightspeedAirlinesDotNetCore2.Entities
         public string Country { get; set; }
         public int Altitude { get; set; }
         public DateTimeOffset TimeZone { get; set; }
+
+//        public IList<RouteAirport> RouteAirports { get; set; }
     }
 }

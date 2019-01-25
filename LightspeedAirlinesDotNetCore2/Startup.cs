@@ -46,8 +46,8 @@ namespace LightspeedAirlinesDotNetCore2
             services.AddDbContext<AirlineApiDbContext>(
                 options => options.UseInMemoryDatabase("airlinedb"));
 
-//            // Use Sql Server Database
-//            const string connectionString = "Server=HR-PC;Database=AirlineDbTest;Trusted_Connection=True;";
+            // Use Sql Server Database
+//            const string connectionString = "Server=DESKTOP-DAN8Q8O;Database=AirlineDbTest;Trusted_Connection=True;";
 //            services.AddDbContext<AirlineApiDbContext>(
 //                options => options.UseSqlServer(connectionString));
 
@@ -74,7 +74,7 @@ namespace LightspeedAirlinesDotNetCore2
                 options.ApiVersionSelector = new CurrentImplementationApiVersionSelector(options);
             });
 
-            // Add Automapper Service (NuGet pkg: Automapper.Extensions.Microsoft.DependencyInjection
+            // Add Automapper Service (NuGet pkg: Automapper.Extensions.Microsoft.DependencyInjection)
             services.AddAutoMapper(
                 options => options.AddProfile<MappingProfile>());
 
@@ -84,6 +84,9 @@ namespace LightspeedAirlinesDotNetCore2
                 options.AddPolicy("AllowMyApp", 
                     policy => policy.AllowAnyOrigin());
             });
+
+            // Add Http Clients for 3rd Party APIs
+            services.AddHttpClient<SingaporeClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
