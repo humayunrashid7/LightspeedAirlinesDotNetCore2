@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using LightspeedAirlinesDotNetCore2.Entities;
 using LightspeedAirlinesDotNetCore2.Filters;
 using LightspeedAirlinesDotNetCore2.Infrastructure;
 using LightspeedAirlinesDotNetCore2.Models;
@@ -11,6 +12,8 @@ using LightspeedAirlinesDotNetCore2.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
@@ -43,13 +46,17 @@ namespace LightspeedAirlinesDotNetCore2
 
             // Use an in memory database for development
             // TODO: Swap out for a real database in production
-            services.AddDbContext<AirlineApiDbContext>(
-                options => options.UseInMemoryDatabase("airlinedb"));
+//            services.AddDbContext<AirlineApiDbContext>(
+//                options => options.UseInMemoryDatabase("airlinedb"));
 
             // Use Sql Server Database
 //            const string connectionString = "Server=DESKTOP-DAN8Q8O;Database=AirlineDbTest;Trusted_Connection=True;";
-//            services.AddDbContext<AirlineApiDbContext>(
-//                options => options.UseSqlServer(connectionString));
+//            const string connectionString = "Server=HR-PC;Database=AirlineDbTest;Trusted_Connection=True;";
+            services.AddDbContext<AirlineApiDbContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("Desktop")));
+
+            // Add ASP.NET Core Identity
+            AddIdentityServices(services);
 
             services
                 .AddMvc(options =>
@@ -82,7 +89,11 @@ namespace LightspeedAirlinesDotNetCore2
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowMyApp", 
-                    policy => policy.AllowAnyOrigin());
+                    policy =>
+                    {
+                        policy.AllowAnyMethod();
+                        policy.AllowAnyOrigin();
+                    });
             });
 
             // Add Http Clients for 3rd Party APIs
@@ -111,7 +122,22 @@ namespace LightspeedAirlinesDotNetCore2
 
             app.UseStatusCodePages();
             app.UseCors("AllowMyApp");
+
+            app.UseAuthentication();
+
             app.UseMvc();
+        }
+
+        private static void AddIdentityServices(IServiceCollection services)
+        {
+            var builder = services.AddIdentityCore<UserEntity>();
+            builder = new IdentityBuilder(builder.UserType, typeof(UserRoleEntity), builder.Services);
+
+            builder.AddRoles<UserRoleEntity>()
+                .AddEntityFrameworkStores<AirlineApiDbContext>()
+                .AddDefaultTokenProviders()
+                .AddSignInManager<SignInManager<UserEntity>>();
+
         }
     }
 }

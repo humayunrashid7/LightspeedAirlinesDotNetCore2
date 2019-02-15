@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using LightspeedAirlinesDotNetCore2.Entities;
 using LightspeedAirlinesDotNetCore2.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LightspeedAirlinesDotNetCore2
 {
-    public class AirlineApiDbContext : DbContext
+    public class AirlineApiDbContext : IdentityDbContext<UserEntity, UserRoleEntity, Guid>
     {
         public AirlineApiDbContext(DbContextOptions options) :  base(options) { }
 

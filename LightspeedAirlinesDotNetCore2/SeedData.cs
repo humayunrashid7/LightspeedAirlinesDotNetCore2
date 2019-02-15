@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LightspeedAirlinesDotNetCore2.Entities;
 using LightspeedAirlinesDotNetCore2.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LightspeedAirlinesDotNetCore2
@@ -14,6 +15,9 @@ namespace LightspeedAirlinesDotNetCore2
         public static async Task InitializeAsync(IServiceProvider services)
         {
             await AddTestData(services.GetRequiredService<AirlineApiDbContext>());
+            await AddTestUsers(
+                services.GetRequiredService<RoleManager<UserRoleEntity>>(),
+                services.GetRequiredService<UserManager<UserEntity>>());
         }
 
         public static async Task AddTestData(AirlineApiDbContext context)
@@ -107,6 +111,33 @@ namespace LightspeedAirlinesDotNetCore2
 
             await context.SaveChangesAsync();
 
+        }
+
+        private static async Task AddTestUsers(
+            RoleManager<UserRoleEntity> roleManager,
+            UserManager<UserEntity> userManager)
+        {
+            var dataExists = roleManager.Roles.Any() || userManager.Users.Any();
+            if (dataExists) return;
+
+            // Add a test role
+            await roleManager.CreateAsync(new UserRoleEntity("Admin"));
+
+            //Add a test user
+            var user = new UserEntity()
+            {
+                Email = "admin@tdotlabs.com",
+                UserName = "admin@tdotlabs.com",
+                FirstName = "Admin",
+                LastName = "Tester",
+                CreatedAt = DateTimeOffset.UtcNow
+            };
+
+            await userManager.CreateAsync(user, "zoyafatima");
+
+            // Put the user in the admin role
+            await userManager.AddToRoleAsync(user, "Admin");
+            await userManager.UpdateAsync(user);
         }
     }
 }

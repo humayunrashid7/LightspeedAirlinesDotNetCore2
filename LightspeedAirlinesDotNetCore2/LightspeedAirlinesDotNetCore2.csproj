@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20190109192628_AirlineApiDB.cs" />
-    <Compile Remove="Migrations\20190109192628_AirlineApiDB.Designer.cs" />
-    <Compile Remove="Migrations\20190109203208_RelationshipsForRoutesAirports.cs" />
-    <Compile Remove="Migrations\20190109203208_RelationshipsForRoutesAirports.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
